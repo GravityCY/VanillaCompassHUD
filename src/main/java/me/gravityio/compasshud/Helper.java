@@ -28,27 +28,13 @@ public class Helper {
         return compasses;
     }
     /**
-     * Get compasses from an inventory
-     */
-    public static List<ItemStack> getCompassesFromInventory(ClientPlayerEntity player, AbstractCollection<ItemStack> inventory) {
-        return getCompassesFromInventory(player, inventory, true);
-    }
-    /**
      * Get all compasses from an inventory
      */
-    public static List<ItemStack> getCompassesFromInventory(ClientPlayerEntity player, AbstractCollection<ItemStack> inventory, boolean allowEnder) {
+    public static List<ItemStack> getCompassesFromInventory(ClientPlayerEntity player, AbstractCollection<ItemStack> inventory) {
         List<ItemStack> compasses = new ArrayList<>();
         for (ItemStack stack : inventory) {
             if (stack.isOf(Items.COMPASS)) {
                 compasses.add(stack);
-            } else if (allowEnder && stack.isOf(Items.ENDER_CHEST)) {
-                CompassHudMod.LOGGER.info("Getting all compasses from ender chest");
-                player.getEnderChestInventory().
-                var a = getCompassesFromInventory(player, player.getEnderChestInventory().stacks, false);
-                for (ItemStack itemStack : a) {
-                    CompassHudMod.LOGGER.info("Found compass: " + itemStack + " in ender chest");
-                }
-                compasses.addAll(a);
             } else if (stack.getItem() instanceof BlockItem blockItem) {
                 if (blockItem.getBlock() instanceof ShulkerBoxBlock) {
                     var inShulker = getCompassesFromShulker(stack);
